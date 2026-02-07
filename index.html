@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Application de suivi de performances sportives - Tractions et Muscle-ups">
+    
+    <!-- PWA Meta tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Sport Tracker">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Sport Tracker - Tractions & Muscle-ups</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <h1>💪 Sport Tracker</h1>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème">🌙</button>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="counters">Compteurs</button>
+        <button class="nav-tab" data-tab="stats">Statistiques</button>
+        <button class="nav-tab" data-tab="history">Historique</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="app-main">
+        
+        <!-- Section Compteurs -->
+        <section id="counters" class="tab-content active">
+            <div class="date-display">
+                <span id="current-date"></span>
+            </div>
+
+            <!-- Compteur Tractions -->
+            <div class="counter-card">
+                <div class="counter-header">
+                    <h2>🏋️ Tractions</h2>
+                    <div class="counter-total" id="pullups-total">0</div>
+                </div>
+                <div class="counter-buttons">
+                    <button class="btn-increment btn-small" data-type="pullups" data-value="1">+1</button>
+                    <button class="btn-increment btn-medium" data-type="pullups" data-value="5">+5</button>
+                    <button class="btn-increment btn-large" data-type="pullups" data-value="10">+10</button>
+                </div>
+                <div class="counter-info">
+                    Total aujourd'hui
+                </div>
+            </div>
+
+            <!-- Compteur Muscle-ups -->
+            <div class="counter-card">
+                <div class="counter-header">
+                    <h2>💥 Muscle-ups</h2>
+                    <div class="counter-total" id="muscleups-total">0</div>
+                </div>
+                <div class="counter-buttons">
+                    <button class="btn-increment btn-small" data-type="muscleups" data-value="1">+1</button>
+                    <button class="btn-increment btn-medium" data-type="muscleups" data-value="5">+5</button>
+                    <button class="btn-increment btn-large" data-type="muscleups" data-value="10">+10</button>
+                </div>
+                <div class="counter-info">
+                    Total aujourd'hui
+                </div>
+            </div>
+
+            <!-- Bouton Reset -->
+            <div class="reset-section">
+                <button id="reset-day" class="btn-reset">Réinitialiser la journée</button>
+            </div>
+        </section>
+
+        <!-- Section Statistiques -->
+        <section id="stats" class="tab-content">
+            <!-- Stats du jour -->
+            <div class="stats-card">
+                <h3>📅 Aujourd'hui</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Tractions</div>
+                        <div class="stat-value" id="stat-today-pullups">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Muscle-ups</div>
+                        <div class="stat-value" id="stat-today-muscleups">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats de la semaine -->
+            <div class="stats-card">
+                <h3>📆 Cette semaine (7 derniers jours)</h3>
+                
+                <!-- Graphique des 7 derniers jours -->
+                <div class="weekly-chart" id="weekly-chart">
+                    <!-- Généré dynamiquement par JS -->
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Total Tractions</div>
+                        <div class="stat-value" id="stat-week-pullups">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Total Muscle-ups</div>
+                        <div class="stat-value" id="stat-week-muscleups">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Moy. Tractions/jour</div>
+                        <div class="stat-value" id="stat-avg-pullups">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Moy. Muscle-ups/jour</div>
+                        <div class="stat-value" id="stat-avg-muscleups">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Historique -->
+        <section id="history" class="tab-content">
+            <div class="history-header">
+                <h3>📋 Historique complet</h3>
+                <button id="clear-history" class="btn-clear">Effacer tout</button>
+            </div>
+            <div id="history-list" class="history-list">
+                <p class="empty-state">Aucune entrée pour le moment</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Script principal -->
+    <script src="script.js"></script>
+</body>
+</html>

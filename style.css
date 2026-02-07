@@ -1,0 +1,568 @@
+/* ====================================
+   VARIABLES CSS
+   ==================================== */
+:root {
+    /* Couleurs principales - Mode clair */
+    --primary-color: #2196F3;
+    --primary-dark: #1976D2;
+    --primary-light: #BBDEFB;
+    
+    --secondary-color: #FF5722;
+    --secondary-dark: #E64A19;
+    
+    --success-color: #4CAF50;
+    --warning-color: #FF9800;
+    --danger-color: #F44336;
+    
+    /* Couleurs de fond et texte */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F5;
+    --bg-card: #FFFFFF;
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --border-color: #E0E0E0;
+    
+    /* Ombres */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    
+    /* Espacements */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+}
+
+/* Mode sombre */
+body.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1E1E1E;
+    --bg-card: #2C2C2C;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --border-color: #404040;
+    
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ====================================
+   RESET ET BASE
+   ==================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ====================================
+   HEADER
+   ==================================== */
+.app-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: var(--spacing-md) var(--spacing-sm);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* ====================================
+   NAVIGATION
+   ==================================== */
+.nav-tabs {
+    display: flex;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 68px;
+    z-index: 99;
+}
+
+.nav-tab {
+    flex: 1;
+    padding: var(--spacing-sm);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.nav-tab:hover {
+    background-color: var(--bg-secondary);
+}
+
+.nav-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* ====================================
+   MAIN CONTENT
+   ==================================== */
+.app-main {
+    padding: var(--spacing-md) var(--spacing-sm);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn var(--transition-normal);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====================================
+   DATE DISPLAY
+   ==================================== */
+.date-display {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ====================================
+   COUNTER CARDS
+   ==================================== */
+.counter-card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.counter-card:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.counter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.counter-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.counter-total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.counter-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.btn-increment {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    color: white;
+}
+
+.btn-small {
+    background: linear-gradient(135deg, #4CAF50, #45A049);
+}
+
+.btn-medium {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+.btn-large {
+    background: linear-gradient(135deg, #FF5722, #E64A19);
+}
+
+.btn-increment:active {
+    transform: scale(0.95);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-increment:hover {
+    filter: brightness(1.1);
+}
+
+.counter-info {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ====================================
+   RESET SECTION
+   ==================================== */
+.reset-section {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.btn-reset {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-reset:hover {
+    background-color: #D32F2F;
+}
+
+.btn-reset:active {
+    transform: scale(0.95);
+}
+
+/* ====================================
+   STATISTICS
+   ==================================== */
+.stats-card {
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+}
+
+.stats-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.stat-item {
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+/* ====================================
+   WEEKLY CHART
+   ==================================== */
+.weekly-chart {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 150px;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+}
+
+.chart-bar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bar-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100px;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    transition: all var(--transition-normal);
+    min-height: 4px;
+}
+
+.bar.pullups {
+    background: linear-gradient(to top, var(--primary-color), var(--primary-light));
+}
+
+.bar.muscleups {
+    background: linear-gradient(to top, var(--secondary-color), #FF8A65);
+}
+
+.chart-day {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.chart-day.today {
+    color: var(--primary-color);
+}
+
+/* ====================================
+   HISTORY
+   ==================================== */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.history-header h3 {
+    font-size: 1.2rem;
+}
+
+.btn-clear {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-clear:hover {
+    background-color: #D32F2F;
+}
+
+.btn-clear:active {
+    transform: scale(0.95);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.history-item {
+    background-color: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary-color);
+    transition: all var(--transition-fast);
+}
+
+.history-item.muscleups {
+    border-left-color: var(--secondary-color);
+}
+
+.history-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+
+.history-type {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.history-type.pullups {
+    color: var(--primary-color);
+}
+
+.history-type.muscleups {
+    color: var(--secondary-color);
+}
+
+.history-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ====================================
+   TOAST NOTIFICATIONS
+   ==================================== */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    transition: bottom var(--transition-normal);
+    font-weight: 600;
+    max-width: 90%;
+}
+
+.toast.show {
+    bottom: 80px;
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+@media (min-width: 768px) {
+    .app-main {
+        padding: var(--spacing-lg);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .counter-buttons {
+        gap: var(--spacing-md);
+    }
+}
+
+/* ====================================
+   UTILITAIRES
+   ==================================== */
+.hidden {
+    display: none !important;
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Touch feedback pour iOS */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Éviter le zoom sur les inputs pour iOS */
+input, select, textarea {
+    font-size: 16px;
+}
