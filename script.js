@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ====================================
 // SERVICE WORKER (pour PWA future)
 // ====================================
-/*
+
 // Décommenter pour activer la PWA
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -533,4 +533,4 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.error('Erreur Service Worker:', err));
     });
 }
-*/
+
