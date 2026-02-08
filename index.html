@@ -15,20 +15,23 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     
-    <title>CompteurUp - Tractions & Muscle-ups</title>
+    <title>Sport Tracker - Tractions & Muscle-ups</title>
 </head>
 <body>
     <!-- Header -->
     <header class="app-header">
-        <h1>💪 CompteurUp</h1>
+        <h1>💪 Sport Tracker</h1>
         <button id="theme-toggle" class="theme-toggle" aria-label="Changer de thème">🌙</button>
     </header>
 
     <!-- Navigation -->
     <nav class="nav-tabs">
-        <button class="nav-tab active" data-tab="counters">Compteurs</button>
-        <button class="nav-tab" data-tab="stats">Statistiques</button>
-        <button class="nav-tab" data-tab="history">Historique</button>
+        <button class="nav-tab active" data-tab="counters">💪</button>
+        <button class="nav-tab" data-tab="stats">📊</button>
+        <button class="nav-tab" data-tab="history">📋</button>
+        <button class="nav-tab" data-tab="goals">🎯</button>
+        <button class="nav-tab" data-tab="badges">🏅</button>
+        <button class="nav-tab" data-tab="settings">⚙️</button>
     </nav>
 
     <!-- Main Content -->
@@ -95,6 +98,14 @@
                 </div>
             </div>
 
+            <!-- Graphique Chart.js - Évolution quotidienne -->
+            <div class="stats-card">
+                <h3>📈 Évolution quotidienne (30 jours)</h3>
+                <div class="chart-container">
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+
             <!-- Stats de la semaine -->
             <div class="stats-card">
                 <h3>📆 Cette semaine (7 derniers jours)</h3>
@@ -123,6 +134,22 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Graphique Chart.js - Totaux hebdomadaires -->
+            <div class="stats-card">
+                <h3>📊 Totaux hebdomadaires (12 semaines)</h3>
+                <div class="chart-container">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Graphique Chart.js - Comparaison mensuelle -->
+            <div class="stats-card">
+                <h3>📅 Comparaison mensuelle</h3>
+                <div class="chart-container">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
         </section>
 
         <!-- Section Historique -->
@@ -136,12 +163,181 @@
             </div>
         </section>
 
+        <!-- Section Objectifs -->
+        <section id="goals" class="tab-content">
+            <div class="goals-header">
+                <h3>🎯 Mes Objectifs</h3>
+            </div>
+
+            <!-- Objectifs quotidiens -->
+            <div class="goal-card">
+                <h4>📅 Objectifs du jour</h4>
+                <div class="goal-item">
+                    <div class="goal-info">
+                        <span class="goal-label">Tractions</span>
+                        <input type="number" id="daily-pullups-goal" class="goal-input" min="0" value="50">
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill pullups" id="daily-pullups-progress"></div>
+                        </div>
+                        <span class="progress-text" id="daily-pullups-text">0/50</span>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-info">
+                        <span class="goal-label">Muscle-ups</span>
+                        <input type="number" id="daily-muscleups-goal" class="goal-input" min="0" value="20">
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill muscleups" id="daily-muscleups-progress"></div>
+                        </div>
+                        <span class="progress-text" id="daily-muscleups-text">0/20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objectifs hebdomadaires -->
+            <div class="goal-card">
+                <h4>📆 Objectifs de la semaine</h4>
+                <div class="goal-item">
+                    <div class="goal-info">
+                        <span class="goal-label">Tractions</span>
+                        <input type="number" id="weekly-pullups-goal" class="goal-input" min="0" value="300">
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill pullups" id="weekly-pullups-progress"></div>
+                        </div>
+                        <span class="progress-text" id="weekly-pullups-text">0/300</span>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <div class="goal-info">
+                        <span class="goal-label">Muscle-ups</span>
+                        <input type="number" id="weekly-muscleups-goal" class="goal-input" min="0" value="100">
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill muscleups" id="weekly-muscleups-progress"></div>
+                        </div>
+                        <span class="progress-text" id="weekly-muscleups-text">0/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <button id="save-goals" class="btn-primary">Sauvegarder les objectifs</button>
+        </section>
+
+        <!-- Section Badges -->
+        <section id="badges" class="tab-content">
+            <div class="badges-header">
+                <h3>🏅 Mes Badges</h3>
+                <p class="badges-subtitle">Débloquez des récompenses en atteignant vos objectifs</p>
+            </div>
+            <div id="badges-grid" class="badges-grid">
+                <!-- Généré dynamiquement -->
+            </div>
+        </section>
+
+        <!-- Section Paramètres -->
+        <section id="settings" class="tab-content">
+            <div class="settings-header">
+                <h3>⚙️ Paramètres</h3>
+            </div>
+
+            <!-- Notifications -->
+            <div class="settings-card">
+                <h4>🔔 Notifications</h4>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <span>Activer les rappels</span>
+                        <input type="checkbox" id="notifications-enabled" class="toggle-switch">
+                    </label>
+                    <p class="setting-description">Recevez des rappels réguliers pour vous entraîner</p>
+                </div>
+                <div class="setting-item" id="notification-interval-container" style="display: none;">
+                    <label class="setting-label">
+                        <span>Intervalle (heures)</span>
+                        <select id="notification-interval" class="setting-select">
+                            <option value="1">1 heure</option>
+                            <option value="2" selected>2 heures</option>
+                            <option value="3">3 heures</option>
+                            <option value="4">4 heures</option>
+                            <option value="6">6 heures</option>
+                            <option value="8">8 heures</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Export/Import -->
+            <div class="settings-card">
+                <h4>📦 Données</h4>
+                <div class="setting-item">
+                    <button id="export-json" class="btn-secondary full-width">📥 Exporter en JSON</button>
+                </div>
+                <div class="setting-item">
+                    <button id="export-csv" class="btn-secondary full-width">📥 Exporter en CSV</button>
+                </div>
+                <div class="setting-item">
+                    <label for="import-file" class="btn-secondary full-width" style="text-align: center; cursor: pointer;">
+                        📤 Importer des données
+                    </label>
+                    <input type="file" id="import-file" accept=".json,.csv" style="display: none;">
+                </div>
+            </div>
+
+            <!-- Comparaisons -->
+            <div class="settings-card">
+                <h4>📈 Comparaisons temporelles</h4>
+                <div class="setting-item">
+                    <button id="show-comparisons" class="btn-secondary full-width">Voir les comparaisons</button>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-card danger-zone">
+                <h4>⚠️ Zone dangereuse</h4>
+                <div class="setting-item">
+                    <button id="reset-all" class="btn-danger full-width">Réinitialiser toutes les données</button>
+                    <p class="setting-description">Cette action est irréversible !</p>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- Modal Comparaisons -->
+    <div id="comparisons-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📈 Comparaisons temporelles</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="comparison-selector">
+                    <button class="comparison-btn active" data-type="daily">Jour vs Jour</button>
+                    <button class="comparison-btn" data-type="weekly">Semaine vs Semaine</button>
+                    <button class="comparison-btn" data-type="monthly">Mois vs Mois</button>
+                </div>
+                <div id="comparison-content" class="comparison-content">
+                    <!-- Généré dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Toast notification -->
     <div id="toast" class="toast"></div>
 
-    <!-- Script principal -->
+    <!-- Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <!-- Scripts de l'application -->
+    <script src="storage.js"></script>
+    <script src="charts.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

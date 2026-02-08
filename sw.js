@@ -8,7 +8,7 @@
    3. Le service worker se chargera automatiquement
    ==================================== */
 
-const CACHE_NAME = 'sport-tracker-v1';
+const CACHE_NAME = 'sport-tracker-v2';
 
 // Liste des fichiers à mettre en cache pour le fonctionnement hors ligne
 const urlsToCache = [
@@ -16,7 +16,10 @@ const urlsToCache = [
     '/index.html',
     '/style.css',
     '/script.js',
-    '/manifest.json'
+    '/storage.js',
+    '/charts.js',
+    '/manifest.json',
+    'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js'
 ];
 
 // Installation du service worker
